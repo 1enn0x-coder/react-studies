@@ -10,8 +10,8 @@ export default function Player({ title, index, handleClick, isDisabled }) {
   return (
     <>
       <div>
-        <h3 style={{ fontSize: "20px" }}>{title}</h3>
-        <div style={{ fontSize: "80px" }}>{diceEmoji}</div>
+        <h3>{title}</h3>
+        <div style={{ fontSize: "60px" }}>{diceEmoji}</div>
         <button onClick={handleClick} style={buttonStyle} disabled={isDisabled}>
           Roll Dice
         </button>
