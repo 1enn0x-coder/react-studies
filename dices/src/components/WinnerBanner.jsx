@@ -1,4 +1,4 @@
-export default function WinnerBanner({ winner, onPlayAgain, rounds  }) {
+export default function WinnerBanner({ winner, onPlayAgain, rounds = 5 }) {
   return (
     <div
       style={{
@@ -23,7 +23,7 @@ export default function WinnerBanner({ winner, onPlayAgain, rounds  }) {
           margin: "0 0 6px 0",
         }}
       >
-      {rounds === 0 ? "You have not played yet" : `Winner of the round ${rounds}`}
+        "Winner of the round {rounds}"
       </div>
       <h2 style={{ margin: "0 0 20px 0", fontSize: "36px" }}>{winner}</h2>
 
@@ -41,7 +41,7 @@ export default function WinnerBanner({ winner, onPlayAgain, rounds  }) {
           fontWeight: "bold",
         }}
       >
-        🎲 Play Again
+        🎲 Play Another Round
       </button>
     </div>
   );
