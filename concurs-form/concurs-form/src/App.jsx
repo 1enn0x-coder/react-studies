@@ -23,7 +23,7 @@ const formSchema = z.object({
   email: z.email("Invalid email address"),
   mobile: z.string().regex(/^\d{9}$/, "Mobile must be exactly 9 digits"),
   region: z.string().min(1, "Region is required"),
-  nickname: z.string().min(2, "Nickname must be at least 2 characters"),
+  nickname: z.string().min(3, "Nickname must be at least 3 characters"),
   password: z
     .string()
     .min(8, "Password must be at least 8 characters")
@@ -59,6 +59,7 @@ export default function App() {
       style={{
         maxWidth: "450px",
         margin: "40px auto",
+        paddingRight: "40px",
         padding: "20px",
         border: "1px solid #ddd",
         borderRadius: "10px",
