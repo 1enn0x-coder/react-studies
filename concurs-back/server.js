@@ -59,6 +59,45 @@ app.post("/addStudent", async (req, res) => {
   }
 });
 
+app.post("/login", async (req, res) => {
+  try {
+    const { mail, password } = req.body;
+
+    if (!mail || !password) {
+      return res.status(400).json({
+        message: "Mail and password are required",
+      });
+    }
+
+    const sql = `
+  SELECT *
+  FROM students
+  WHERE mail = ? AND password = ?
+`;
+
+    const [rows] = await pool.query(sql, [mail, password]);
+
+    if (rows.length === 0) {
+      return res.status(401).json({
+        message: "Invalid mail or password",
+      });
+    }
+
+    const student = rows[0];
+
+    res.status(200).json({
+      message: "Login successful",
+      student,
+    });
+  } catch (error) {
+    console.log("login error =>", error);
+    res.status(500).json({
+      message: "Something went wrong",
+      error: error.message,
+    });
+  }
+});
+
 app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
 });
