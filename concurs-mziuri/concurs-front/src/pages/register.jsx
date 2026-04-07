@@ -45,13 +45,14 @@ export default function App() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:5000/register", {
+      const response = await fetch("http://localhost:3000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
       const result = await response.json();
+      console.log(result);
 
       if (!response.ok) {
         alert(result.message || "Registration failed");
@@ -70,12 +71,12 @@ export default function App() {
     <div className="min-h-screen  flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-yellow-400 p-6 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-          Registration Form
+          რეგისტრაცია
         </h2>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium">Name</label>
+            <label className="block text-sm font-medium">სახელი</label>
             <input
               type="text"
               {...register("name")}
@@ -87,7 +88,7 @@ export default function App() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Last Name</label>
+            <label className="block text-sm font-medium">გვარი</label>
             <input
               type="text"
               {...register("lastname")}
@@ -101,7 +102,7 @@ export default function App() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Email</label>
+            <label className="block text-sm font-medium">მეილი</label>
             <input
               type="email"
               {...register("mail")}
@@ -113,7 +114,9 @@ export default function App() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Phone Number</label>
+            <label className="block text-sm font-medium">
+              ტელეფონის ნომერი
+            </label>
             <input
               type="text"
               placeholder="599123456"
@@ -128,7 +131,7 @@ export default function App() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Class Number</label>
+            <label className="block text-sm font-medium">კლასი</label>
             <input
               type="number"
               {...register("class_number")}
@@ -142,7 +145,7 @@ export default function App() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Region</label>
+            <label className="block text-sm font-medium">რეგიონი</label>
             <select
               {...register("region")}
               className="w-full mt-1 p-2 rounded-md border border-gray-300 bg-white focus:ring-2 focus:ring-yellow-400"
@@ -162,7 +165,7 @@ export default function App() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Nickname</label>
+            <label className="block text-sm font-medium">ზედმეტსახელი</label>
             <input
               type="text"
               {...register("nickname")}
@@ -176,7 +179,7 @@ export default function App() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium">Password</label>
+            <label className="block text-sm font-medium">პაროლი</label>
             <input
               type="password"
               {...register("password")}

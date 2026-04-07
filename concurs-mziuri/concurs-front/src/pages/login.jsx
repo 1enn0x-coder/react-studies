@@ -7,19 +7,6 @@ const loginSchema = z.object({
   password: z.string().min(1, "Password is required"),
 });
 
-const inputStyle = {
-  width: "100%",
-  padding: "8px",
-  marginTop: "5px",
-  boxSizing: "border-box",
-};
-
-const errorStyle = {
-  color: "red",
-  fontSize: "14px",
-  marginTop: "5px",
-};
-
 export default function Login() {
   const {
     register,
@@ -36,7 +23,7 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,50 +47,54 @@ export default function Login() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: "450px",
-        margin: "40px auto",
-        padding: "20px",
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-        fontFamily: "Arial, sans-serif",
-        backgroundColor: "#f2c95a",
-      }}
-    >
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Login Form</h2>
+    <div className="min-h-[80vh] flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-yellow-400 p-6 rounded-xl shadow-lg">
+        <h2 className="text-2xl font-bold text-center mb-2 text-gray-800">
+          ავტორიზაცია
+        </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ marginBottom: "15px" }}>
-          <label>Email</label>
-          <input type="email" {...register("mail")} style={inputStyle} />
-          {errors.mail && <p style={errorStyle}>{errors.mail.message}</p>}
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-800">
+              მეილი
+            </label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              {...register("mail")}
+              className="w-full mt-1 p-2 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            />
+            {errors.mail && (
+              <p className="text-red-500 text-sm mt-1">{errors.mail.message}</p>
+            )}
+          </div>
 
-        <div style={{ marginBottom: "15px" }}>
-          <label>Password</label>
-          <input type="password" {...register("password")} style={inputStyle} />
-          {errors.password && (
-            <p style={errorStyle}>{errors.password.message}</p>
-          )}
-        </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-800">
+              პაროლი
+            </label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              {...register("password")}
+              className="w-full mt-1 p-2 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          style={{
-            width: "100%",
-            padding: "10px",
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          {isSubmitting ? "Logging in..." : "Login"}
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-blue-500 hover:bg-yellow-500 text-black font-semibold py-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Logging in..." : "Login"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

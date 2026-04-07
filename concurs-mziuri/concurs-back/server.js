@@ -11,6 +11,10 @@ app.use(express.json());
 
 app.use("/", authRoutes);
 
+app.get("/health", (req, res) => {
+  res.json({ ok: true, message: "Backend works" });
+});
+
 app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
 });
