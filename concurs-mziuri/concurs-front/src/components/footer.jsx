@@ -71,7 +71,7 @@ export default function Footer() {
           {/* Related */}
           <div className="lg:col-span-2">
             <h3 className="text-sm font-bold uppercase tracking-wider text-black mb-4">
-              დაკავშირებული
+              ჩვენი საიტები
             </h3>
             <ul className="space-y-3">
               <li>
@@ -81,7 +81,12 @@ export default function Footer() {
               </li>
               <li>
                 <NavLink to="/internet-concurs" className={linkClass}>
-                  ინტერნეტ კონკურსი
+                  მზიურის ბლოგი
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/internet-concurs" className={linkClass}>
+                  კონკურსის საიტი
                 </NavLink>
               </li>
               <li>
