@@ -1,6 +1,7 @@
 import express from "express";
 import { z } from "zod";
 import pool from "../data.js";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -46,6 +47,8 @@ router.post("/register", async (req, res) => {
       is_active,
     } = validated.data;
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const sql = `
       INSERT INTO students
       (name, lastname, mail, phone_number, class_number, region, nickname, password, is_active)
@@ -60,7 +63,7 @@ router.post("/register", async (req, res) => {
       class_number,
       region,
       nickname,
-      password,
+      hashedPassword,
       is_active,
     ]);
 
@@ -78,9 +81,18 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { mail, password } = req.body;
-
   try {
+    const validated = loginSchema.safeParse(req.body);
+
+    if (!validated.success) {
+      return res.status(400).json({
+        message: "Validation failed",
+        errors: validated.error.flatten().fieldErrors,
+      });
+    }
+
+    const { mail, password } = validated.data;
+
     const sql = "SELECT * FROM students WHERE mail = ?";
     const [result] = await pool.query(sql, [mail]);
 
@@ -88,7 +100,9 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "User or password is incorrect" });
     }
 
-    if (result[0].password !== password) {
+    const passwordMatches = await bcrypt.compare(password, result[0].password);
+
+    if (!passwordMatches) {
       return res.status(401).json({ message: "User or password is incorrect" });
     }
 
