@@ -8,9 +8,9 @@ const mainNavItems = [
     key: "debuleba",
     label: "დებულება",
     children: [
-      { label: "მიზანი", to: "/mission" },
-      { label: "წესები", to: "/rules" },
-      { label: "პრიზები", to: "/prizes" },
+      { label: "მიზანი", to: "/provisions/1" },
+      { label: "წესები", to: "/provisions/2" },
+      { label: "პრიზები", to: "/provisions/3" },
     ],
   },
   {

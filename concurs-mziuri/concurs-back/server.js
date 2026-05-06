@@ -1,6 +1,7 @@
 import express from "express";
 import mysql from "mysql2/promise";
 import authRoutes from "./routes/auth.js";
+import provisionsRoutes from "./routes/provisions.js";
 import cors from "cors";
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(
 app.use(express.json());
 
 app.use("/", authRoutes);
+app.use("/", provisionsRoutes);
 
 app.get("/health", (req, res) => {
   res.json({ ok: true, message: "Backend works" });

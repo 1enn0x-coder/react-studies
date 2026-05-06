@@ -7,6 +7,7 @@ import App from "./App.jsx";
 import Register from "./pages/register.jsx";
 import Login from "./pages/login.jsx";
 import Home from "./pages/home.jsx";
+import AllProvisions from "./pages/allprovisions.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/login", element: <Login /> },
       { path: "/", element: <Home /> },
+      { path: "/provisions/:id", element: <AllProvisions /> },
     ],
   },
 ]);
